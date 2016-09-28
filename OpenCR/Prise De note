@@ -1,0 +1,78 @@
+Partie 1:
+----------
+                        Les Servlets 1
+                        ------------
+<load-on-startup>N</> N positif est la priorité.
+N=0 implique la servlet est lancée au démarrage
+
+getServletContext() : retourne un pointeur sur le Servlet courant.
+getRequestDispatcher(): retourne un objet permettant de manipuler le ServletContext
+forward() : Redirection vers une page
+getParameter(nomParametre) : recupere la valeur du parametre passé en parametre, elle retourne quoi qu'il arrive une string
+
+                             JSP: 2
+                             ----
+A ajouter dans le repertoire WEB/INF ,pour empecher l'accès depuis le navigateur
+<% Code Java Ici %>
+NB: Les parametres de la requete sont directement récupérables depuis la JSP grace à l'objet request
+sans passer par la servlet
+
+Les Balises:
+------------
+          <%-- Commentaire ignoré par JSP et pas affiché au client --%>
+          <%! String s ="declaration varible" %>  Il est possible de déclarer une fonction à l'intérieur de ce bloc
+          <% Code Java %> Sert à inclure du code Java
+
+Les Directives:
+---------------
+taglib : permet d'inclure une bibliotheque
+
+page   : definit les infos liés à la page JSP. on y voit les déclarations des java.util , des classes utilisés dans la jsp
+         etc. les imports sont séparées par des virgules.
+
+include :  Permet d'inclure un fichier dans la JSP
+
+           <%@include file="AutrePage"%> Inclusion fait à la compilation
+           <jsp:include page=""/>  Inclusion fait à l'exécution
+
+
+
+                        Transmissions de Données 3
+                        ------------------------
+setAttribute(clé,valeur); Ajoute un attribut à la requete
+
+                        JAVABEAN: 4
+                        --------
+-Composant réutilisable
+-Proprités du Bean
+    -Classe java public
+     -Posseder un constructeur par defaut ,sans parametre
+     -Peut implementer l'interface serializable
+     -ne doit pas avoir de champs publics
+     -avoir des getters et setters respectant la norme pour le nommage
+
+Utilisation:
+------------
+<jsp:useBean id="fb" class="bean.Monbean" scope="request" />
+NB: "class" à préciser si on souhaite récuperer
+
+<jsp:getProperty name="fb1" property="nom"></jsp:getProperty> affiche la valeur de la proprieté spécifiée
+
+<jsp:setProperty name="coyote" property="prenom" param="prenomCoyote"/> associe à la proprieté prenom, la valeur du "param" de la requete
+
+
+<jsp:setProperty name="coyote" property="*" /> associe automatiquement la valeur récupérée depuis chaque paramètre de
+                                            la requête à la propriété de même nom
+
+
+<jsp:forward page="/page.jsp" />
+NB: impossible de rediriger vers une page extérieur à l'application
+
+
+                          Portée des Variables (Scope) : 5
+                          --------------------
+
+Page (JSP) :  uniquement dans la page JSP en question (Creation Possible seulement sur la page)
+Requete    :  uniquement lors de l'existance de la requete , fini lorsque la reponse est envoyée au client
+Session    :  uniquement lors de la session en cours ,termine lorsque le navigateur ferme ou inactivité durant longtemps
+application : durant toute l'existance de l'application.
