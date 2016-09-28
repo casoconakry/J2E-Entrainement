@@ -8,7 +8,6 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
-          <element id="library" level="project" name="Maven: caso.camara.s1.ihm:caso-calculator:1.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
